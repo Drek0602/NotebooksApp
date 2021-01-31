@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Notebook" representedClassName="Notebook" syncable="YES" codeGenerationType="class">
+    <entity name="Notebook" representedClassName=".NotebookMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
     </entity>
