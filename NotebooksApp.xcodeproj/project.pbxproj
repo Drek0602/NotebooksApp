@@ -14,7 +14,19 @@
 		020D750B25C0A1A90016448E /* NotebooksApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 020D750925C0A1A90016448E /* NotebooksApp.xcdatamodeld */; };
 		020D750D25C0A1AA0016448E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020D750C25C0A1AA0016448E /* Assets.xcassets */; };
 		020D751025C0A1AA0016448E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 020D750E25C0A1AA0016448E /* LaunchScreen.storyboard */; };
+		02563B4725C715D4004B565F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B4625C715D4004B565F /* DataController.swift */; };
+		02563B5225C71EA7004B565F /* NotebooksAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B5125C71EA7004B565F /* NotebooksAppTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		02563B5425C71EA7004B565F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 020D74F525C0A1A80016448E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 020D74FC25C0A1A90016448E;
+			remoteInfo = NotebooksApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		020D74FD25C0A1A90016448E /* NotebooksApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotebooksApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,10 +38,21 @@
 		020D750C25C0A1AA0016448E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		020D750F25C0A1AA0016448E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		020D751125C0A1AA0016448E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02563B4625C715D4004B565F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		02563B4F25C71EA7004B565F /* NotebooksAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotebooksAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02563B5125C71EA7004B565F /* NotebooksAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebooksAppTests.swift; sourceTree = "<group>"; };
+		02563B5325C71EA7004B565F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		020D74FA25C0A1A90016448E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02563B4C25C71EA7004B565F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				020D74FF25C0A1A90016448E /* NotebooksApp */,
+				02563B5025C71EA7004B565F /* NotebooksAppTests */,
 				020D74FE25C0A1A90016448E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				020D74FD25C0A1A90016448E /* NotebooksApp.app */,
+				02563B4F25C71EA7004B565F /* NotebooksAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,6 +83,7 @@
 		020D74FF25C0A1A90016448E /* NotebooksApp */ = {
 			isa = PBXGroup;
 			children = (
+				02563B4625C715D4004B565F /* DataController.swift */,
 				020D750025C0A1A90016448E /* AppDelegate.swift */,
 				020D750225C0A1A90016448E /* SceneDelegate.swift */,
 				020D750425C0A1A90016448E /* ViewController.swift */,
@@ -68,6 +94,15 @@
 				020D750925C0A1A90016448E /* NotebooksApp.xcdatamodeld */,
 			);
 			path = NotebooksApp;
+			sourceTree = "<group>";
+		};
+		02563B5025C71EA7004B565F /* NotebooksAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				02563B5125C71EA7004B565F /* NotebooksAppTests.swift */,
+				02563B5325C71EA7004B565F /* Info.plist */,
+			);
+			path = NotebooksAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,6 +125,24 @@
 			productReference = 020D74FD25C0A1A90016448E /* NotebooksApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		02563B4E25C71EA7004B565F /* NotebooksAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02563B5825C71EA7004B565F /* Build configuration list for PBXNativeTarget "NotebooksAppTests" */;
+			buildPhases = (
+				02563B4B25C71EA7004B565F /* Sources */,
+				02563B4C25C71EA7004B565F /* Frameworks */,
+				02563B4D25C71EA7004B565F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02563B5525C71EA7004B565F /* PBXTargetDependency */,
+			);
+			name = NotebooksAppTests;
+			productName = NotebooksAppTests;
+			productReference = 02563B4F25C71EA7004B565F /* NotebooksAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -101,6 +154,10 @@
 				TargetAttributes = {
 					020D74FC25C0A1A90016448E = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					02563B4E25C71EA7004B565F = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 020D74FC25C0A1A90016448E;
 					};
 				};
 			};
@@ -118,6 +175,7 @@
 			projectRoot = "";
 			targets = (
 				020D74FC25C0A1A90016448E /* NotebooksApp */,
+				02563B4E25C71EA7004B565F /* NotebooksAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -133,6 +191,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02563B4D25C71EA7004B565F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -140,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02563B4725C715D4004B565F /* DataController.swift in Sources */,
 				020D750525C0A1A90016448E /* ViewController.swift in Sources */,
 				020D750125C0A1A90016448E /* AppDelegate.swift in Sources */,
 				020D750B25C0A1A90016448E /* NotebooksApp.xcdatamodeld in Sources */,
@@ -147,7 +213,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02563B4B25C71EA7004B565F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02563B5225C71EA7004B565F /* NotebooksAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		02563B5525C71EA7004B565F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 020D74FC25C0A1A90016448E /* NotebooksApp */;
+			targetProxy = 02563B5425C71EA7004B565F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		020D750625C0A1A90016448E /* Main.storyboard */ = {
@@ -321,6 +403,44 @@
 			};
 			name = Release;
 		};
+		02563B5625C71EA7004B565F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NotebooksAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nostapps.NotebooksAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NotebooksApp.app/NotebooksApp";
+			};
+			name = Debug;
+		};
+		02563B5725C71EA7004B565F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NotebooksAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nostapps.NotebooksAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NotebooksApp.app/NotebooksApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -338,6 +458,15 @@
 			buildConfigurations = (
 				020D751525C0A1AA0016448E /* Debug */,
 				020D751625C0A1AA0016448E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02563B5825C71EA7004B565F /* Build configuration list for PBXNativeTarget "NotebooksAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02563B5625C71EA7004B565F /* Debug */,
+				02563B5725C71EA7004B565F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
