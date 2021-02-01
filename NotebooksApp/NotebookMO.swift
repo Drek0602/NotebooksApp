@@ -10,6 +10,7 @@ import CoreData
 
 public class NotebookMO: NSManagedObject {
     
+    @discardableResult
     static func createNotebook(createdAt: Date,
                                title: String,
         in managedObjectContext: NSManagedObjectContext) -> NotebookMO? {
