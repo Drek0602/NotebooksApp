@@ -13,11 +13,17 @@ class DataController: NSObject {
     var persistentContainer: NSPersistentContainer
     
     @discardableResult 
-    init(modelName: String, completionHandler: (@escaping (NSPersistentContainer?) -> ())) {
-        self.persistentContainer = NSPersistentContainer(name: modelName)
+    init(modelName: String, optionalStoreName: String?, completionHandler: (@escaping (NSPersistentContainer?) -> ())) {
+        
+        if let optionalStoreName = optionalStoreName {
+            let managedObjectModel = Self.managedObjectModel(with: modelName)
+            self.persistentContainer = NSPersistentContainer(name: optionalStoreName, managedObjectModel: managedObjectModel)
+            
+        } else {
+            self.persistentContainer = NSPersistentContainer(name: modelName)
+        }
         
         super.init()
-        
         
         persistentContainer.loadPersistentStores { [weak self] (description, error) in
             if let error = error {
@@ -44,15 +50,34 @@ class DataController: NSObject {
         do {
             return try persistentContainer.viewContext.save()
         } catch {
-            fatalError("Failure saving view context")
+            print("Failure saving view context")
             print("\(error.localizedDescription)")
         }
         
+    }
+    
+    func reset () {
+        persistentContainer.viewContext.reset()
+    }
+    
+    
+    //function to create the managedObjectModel
+    static func managedObjectModel(with name: String) -> NSManagedObjectModel {
+        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
+            fatalError("Error: could not find model")
+        }
+        
+        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Error: could not initialize model from: \(modelURL)")
+        }
+        
+        return managedObjectModel
         
     }
-       
     
 }
+
+
 
 extension DataController {
     func loadNotebooksIntoViewContext() {
