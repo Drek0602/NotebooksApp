@@ -10,7 +10,10 @@ import CoreData
 
 class DataController: NSObject {
     
-    var persistentContainer: NSPersistentContainer
+    private let persistentContainer: NSPersistentContainer
+    var viewContext: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
     
     @discardableResult 
     init(modelName: String, optionalStoreName: String?, completionHandler: (@escaping (NSPersistentContainer?) -> ())) {
