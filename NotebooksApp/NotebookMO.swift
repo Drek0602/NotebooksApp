@@ -19,6 +19,7 @@ public class NotebookMO: NSManagedObject {
         notebook?.createdAt = createdAt
         notebook?.title = title
         
+        
         return notebook
     }
 
