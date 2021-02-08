@@ -17,7 +17,6 @@ class DataController: NSObject {
     
     @discardableResult 
     init(modelName: String, optionalStoreName: String?, completionHandler: (@escaping (NSPersistentContainer?) -> ())) {
-        
         if let optionalStoreName = optionalStoreName {
             let managedObjectModel = Self.managedObjectModel(with: modelName)
             self.persistentContainer = NSPersistentContainer(name: optionalStoreName, managedObjectModel: managedObjectModel)

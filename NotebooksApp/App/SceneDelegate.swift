@@ -10,13 +10,35 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var dataController: DataController!
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        //integrar coredate al principio de nuestra app
+        //crear un data controller que vamos a pasar a nuestro view controller
+        
+        dataController = DataController(modelName: "NotebooksModel", optionalStoreName: nil, completionHandler: { _ in })
+        
+        //instanciar nuestro vc pasandole el dataController / setear el rootViewController del window
+        
+        
+        guard let tableNotebookViewcontroller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "NotebookTableViewController") as? NotebookTableViewController else {
+            fatalError("NotebookTableViewController could not be created")
+        }
+        
+        tableNotebookViewcontroller.dataController = dataController
+        
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        self.window = UIWindow(windowScene: windowScene)
+        self.window?.rootViewController = tableNotebookViewcontroller
+        self.window?.makeKeyAndVisible()
+
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

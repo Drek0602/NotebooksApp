@@ -29,9 +29,9 @@ class NotebookTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataController = DataController(modelName: "NotebooksModel", optionalStoreName: nil, completionHandler: { _ in })
+        //dataController = DataController(modelName: "NotebooksModel", optionalStoreName: nil, completionHandler: { _ in })
         
-        dataController?.loadNotebooksIntoViewContext()
+        //dataController?.loadNotebooksIntoViewContext()
         
         guard let dataController = dataController else {return}
         

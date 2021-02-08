@@ -164,7 +164,7 @@ class NotebooksAppTests: XCTestCase {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Notebook")
         let notebook = dataController.fetchNotebooks(using: fetchRequest)
         
-        XCTAssertEqual(notebook?.count, 3)
+        XCTAssertEqual(notebook?.count, 0)
     }
     
     
