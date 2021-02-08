@@ -21,7 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //integrar coredate al principio de nuestra app
         //crear un data controller que vamos a pasar a nuestro view controller
         
-        dataController = DataController(modelName: "NotebooksModel", optionalStoreName: nil, completionHandler: { _ in })
+        dataController = DataController(modelName: "NotebooksModel", optionalStoreName: nil, completionHandler: { [weak self] (persistentContainer) in
+            
+            //aqui va estar nuestro core data stack inicializado
+            guard persistentContainer != nil else {
+                fatalError("the core data stack was not created")
+            }
+            
+            self?.preloadData()
+            
+        })
         
         //instanciar nuestro vc pasandole el dataController / setear el rootViewController del window
         
@@ -37,8 +46,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         self.window?.rootViewController = tableNotebookViewcontroller
         self.window?.makeKeyAndVisible()
-
         
+    }
+    
+    func preloadData() {
+        dataController?.loadNotebooksIntoViewContext()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

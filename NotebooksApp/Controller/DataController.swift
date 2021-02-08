@@ -27,12 +27,18 @@ class DataController: NSObject {
         
         super.init()
         
-        persistentContainer.loadPersistentStores { [weak self] (description, error) in
-            if let error = error {
-                fatalError("Could not load coreData: \(error)")
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.persistentContainer.loadPersistentStores { [weak self] (description, error) in
+                if let error = error {
+                    fatalError("Could not load coreData: \(error)")
+                }
+                
+                DispatchQueue.main.async {
+                    completionHandler(self?.persistentContainer)
+                    
+                }
+                
             }
-            
-            completionHandler(self?.persistentContainer)
             
         }
         
