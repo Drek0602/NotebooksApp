@@ -139,6 +139,35 @@ class NotebooksAppTests: XCTestCase {
         
     }
     
+    func testDelete_DataController_DeleDataInPersistentStore() {
+        let dataController = DataController(modelName: modelName, optionalStoreName: optionalStore) { (persistentContainer) in
+            guard let managedObjectContext = persistentContainer?.viewContext else {
+                XCTFail()
+                return
+                
+            }
+            
+        }
+        
+        //cargar datos
+        dataController.loadNotebooksIntoViewContext()
+        //salvar datos del managedobjectContext
+        dataController.save()
+        
+        //clean up / reset al managedobjectContext para borrar los datos de memoria
+        dataController.reset()
+        
+        //delete data
+        dataController.delete()
+        
+        //cargar
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Notebook")
+        let notebook = dataController.fetchNotebooks(using: fetchRequest)
+        
+        XCTAssertEqual(notebook?.count, 3)
+    }
+    
+    
     //MARK: - Helper Methods
     func insertNotebooksInto(managedObjectContext: NSManagedObjectContext) {
         NotebookMO.createNotebook(createdAt: Date(), title: "notebook1", in: managedObjectContext)

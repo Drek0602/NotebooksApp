@@ -63,6 +63,20 @@ class DataController: NSObject {
         persistentContainer.viewContext.reset()
     }
     
+    func delete() {
+        let persistentURL = persistentContainer.persistentStoreCoordinator.url(for: persistentContainer.persistentStoreCoordinator.persistentStores[0])
+        
+        do {
+            
+            try persistentContainer.persistentStoreCoordinator.destroyPersistentStore(at: persistentURL, ofType: NSSQLiteStoreType, options: nil)
+            
+        } catch {
+            fatalError("")
+            
+        }
+    
+    }
+    
     
     //function to create the managedObjectModel
     static func managedObjectModel(with name: String) -> NSManagedObjectModel {
