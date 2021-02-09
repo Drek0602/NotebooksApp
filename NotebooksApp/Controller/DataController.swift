@@ -21,20 +21,32 @@ class DataController: NSObject {
             let managedObjectModel = Self.managedObjectModel(with: modelName)
             self.persistentContainer = NSPersistentContainer(name: optionalStoreName, managedObjectModel: managedObjectModel)
             
-        } else {
-            self.persistentContainer = NSPersistentContainer(name: modelName)
-        }
-        
-        super.init()
-        
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.persistentContainer.loadPersistentStores { [weak self] (description, error) in
+            super.init()
+            
+            persistentContainer.loadPersistentStores { (description, error) in
                 if let error = error {
-                    fatalError("Could not load coreData: \(error)")
+                    fatalError("Could not load CoreData Stack \(error.localizedDescription)")
                 }
                 
-                DispatchQueue.main.async {
-                    completionHandler(self?.persistentContainer)
+                completionHandler(self.persistentContainer)
+                
+            }
+            
+        } else {
+            self.persistentContainer = NSPersistentContainer(name: modelName)
+            
+            super.init()
+            
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                self?.persistentContainer.loadPersistentStores { [weak self] (description, error) in
+                    if let error = error {
+                        fatalError("Could not load coreData: \(error)")
+                    }
+                    
+                    DispatchQueue.main.async {
+                        completionHandler(self?.persistentContainer)
+                        
+                    }
                     
                 }
                 
