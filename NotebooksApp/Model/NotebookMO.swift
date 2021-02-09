@@ -11,6 +11,20 @@ import CoreData
 
 public class NotebookMO: NSManagedObject {
     
+    //init de cualquier clas NSObject, y deinit
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
+        
+        print("notebook created")
+        
+    }
+    
+    public override func didTurnIntoFault() {
+        super.didTurnIntoFault()
+        
+        print("fault created")
+    }
+    
     static var format: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .short

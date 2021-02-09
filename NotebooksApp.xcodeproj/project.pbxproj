@@ -14,10 +14,11 @@
 		020D750B25C0A1A90016448E /* NotebooksModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 020D750925C0A1A90016448E /* NotebooksModel.xcdatamodeld */; };
 		020D750D25C0A1AA0016448E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020D750C25C0A1AA0016448E /* Assets.xcassets */; };
 		020D751025C0A1AA0016448E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 020D750E25C0A1AA0016448E /* LaunchScreen.storyboard */; };
+		0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */; };
+		0246F61325D34E2900FB6918 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F61225D34E2900FB6918 /* NotesTests.swift */; };
 		02563B4725C715D4004B565F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B4625C715D4004B565F /* DataController.swift */; };
 		02563B5225C71EA7004B565F /* NotebooksAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B5125C71EA7004B565F /* NotebooksAppTests.swift */; };
 		02563B6425C75A20004B565F /* NotebookMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B6325C75A20004B565F /* NotebookMO.swift */; };
-		028071C525D075D700C1253C /* NoteMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028071C325D075D700C1253C /* NoteMO+CoreDataClass.swift */; };
 		028071D625D0856200C1253C /* NotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028071D525D0856200C1253C /* NotebookTableViewController.swift */; };
 		028071DA25D0A60F00C1253C /* NotebookTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028071D925D0A60F00C1253C /* NotebookTableViewControllerTests.swift */; };
 /* End PBXBuildFile section */
@@ -42,12 +43,13 @@
 		020D750C25C0A1AA0016448E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		020D750F25C0A1AA0016448E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		020D751125C0A1AA0016448E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0246F61225D34E2900FB6918 /* NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTests.swift; sourceTree = "<group>"; };
 		02563B4625C715D4004B565F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		02563B4F25C71EA7004B565F /* NotebooksAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotebooksAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02563B5125C71EA7004B565F /* NotebooksAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebooksAppTests.swift; sourceTree = "<group>"; };
 		02563B5325C71EA7004B565F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02563B6325C75A20004B565F /* NotebookMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookMO.swift; sourceTree = "<group>"; };
-		028071C325D075D700C1253C /* NoteMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		028071D525D0856200C1253C /* NotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookTableViewController.swift; sourceTree = "<group>"; };
 		028071D925D0A60F00C1253C /* NotebookTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookTableViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,8 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				02563B5125C71EA7004B565F /* NotebooksAppTests.swift */,
-				02563B5325C71EA7004B565F /* Info.plist */,
 				028071D925D0A60F00C1253C /* NotebookTableViewControllerTests.swift */,
+				0246F61225D34E2900FB6918 /* NotesTests.swift */,
+				02563B5325C71EA7004B565F /* Info.plist */,
 			);
 			path = NotebooksAppTests;
 			sourceTree = "<group>";
@@ -142,7 +145,7 @@
 		028071D225D0768400C1253C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				028071C325D075D700C1253C /* NoteMO+CoreDataClass.swift */,
+				0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */,
 				020D750925C0A1A90016448E /* NotebooksModel.xcdatamodeld */,
 				02563B6325C75A20004B565F /* NotebookMO.swift */,
 			);
@@ -252,7 +255,7 @@
 				02563B4725C715D4004B565F /* DataController.swift in Sources */,
 				020D750525C0A1A90016448E /* ViewController.swift in Sources */,
 				02563B6425C75A20004B565F /* NotebookMO.swift in Sources */,
-				028071C525D075D700C1253C /* NoteMO+CoreDataClass.swift in Sources */,
+				0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */,
 				028071D625D0856200C1253C /* NotebookTableViewController.swift in Sources */,
 				020D750125C0A1A90016448E /* AppDelegate.swift in Sources */,
 				020D750B25C0A1A90016448E /* NotebooksModel.xcdatamodeld in Sources */,
@@ -266,6 +269,7 @@
 			files = (
 				02563B5225C71EA7004B565F /* NotebooksAppTests.swift in Sources */,
 				028071DA25D0A60F00C1253C /* NotebookTableViewControllerTests.swift in Sources */,
+				0246F61325D34E2900FB6918 /* NotesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

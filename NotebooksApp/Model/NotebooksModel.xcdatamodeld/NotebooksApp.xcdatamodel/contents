@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Note" representedClassName="NoteMO" syncable="YES" codeGenerationType="category">
+        <attribute name="contents" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="notebook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Notebook" inverseName="notes" inverseEntity="Notebook"/>
+        <relationship name="notebook" maxCount="1" deletionRule="Nullify" destinationEntity="Notebook" inverseName="notes" inverseEntity="Notebook"/>
     </entity>
     <entity name="Notebook" representedClassName=".NotebookMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
@@ -10,7 +12,7 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="notebook" inverseEntity="Note"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-63" positionY="0" width="128" height="59"/>
-        <element name="Notebook" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="Note" positionX="-580.5447387695312" positionY="-4.133056640625" width="128" height="103"/>
+        <element name="Notebook" positionX="-285.7327880859375" positionY="-87.07583618164062" width="128" height="74"/>
     </elements>
 </model>

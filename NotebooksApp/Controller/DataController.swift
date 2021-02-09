@@ -66,6 +66,14 @@ class DataController: NSObject {
         
     }
     
+    func fetchNotes(using fetchRequest: NSFetchRequest<NSFetchRequestResult>) -> [NoteMO]? {
+        do{
+            return try persistentContainer.viewContext.fetch(fetchRequest) as? [NoteMO]
+        } catch {
+            fatalError("Failure to fetch notes with context: \(fetchRequest) \(error)")
+        }
+    }
+    
     func save() {
         do {
             return try persistentContainer.viewContext.save()
@@ -114,8 +122,33 @@ class DataController: NSObject {
 
 
 extension DataController {
+    
+    func loadNotesIntoViewContext() {
+        let managedObjectContext = viewContext
+        //crear notas
+       guard let notebook = NotebookMO.createNotebook(createdAt: Date(),
+                                                      title: "notebook1",
+                                                      in: managedObjectContext) else {return}
+        
+        NoteMO.createNote(managedObjectContext: managedObjectContext,
+                          notebook: notebook,
+                          title: "Nota 1",
+                          createdAt: Date())
+        NoteMO.createNote(managedObjectContext: managedObjectContext,
+                          notebook: notebook,
+                          title: "Nota 2",
+                          createdAt: Date())
+        NoteMO.createNote(managedObjectContext: managedObjectContext,
+                          notebook: notebook,
+                          title: "Nota 3",
+                          createdAt: Date())
+        
+        
+    }
+    
+    
     func loadNotebooksIntoViewContext() {
-        let managedObjectContext = persistentContainer.viewContext
+        let managedObjectContext = viewContext
         
         NotebookMO.createNotebook(createdAt: Date(), title: "notebook1", in: managedObjectContext)
         
