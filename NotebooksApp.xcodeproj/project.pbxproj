@@ -16,6 +16,7 @@
 		020D751025C0A1AA0016448E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 020D750E25C0A1AA0016448E /* LaunchScreen.storyboard */; };
 		0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */; };
 		0246F61325D34E2900FB6918 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F61225D34E2900FB6918 /* NotesTests.swift */; };
+		0246F62125D35B5300FB6918 /* NoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F62025D35B5300FB6918 /* NoteTableViewController.swift */; };
 		02563B4725C715D4004B565F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B4625C715D4004B565F /* DataController.swift */; };
 		02563B5225C71EA7004B565F /* NotebooksAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B5125C71EA7004B565F /* NotebooksAppTests.swift */; };
 		02563B6425C75A20004B565F /* NotebookMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B6325C75A20004B565F /* NotebookMO.swift */; };
@@ -45,6 +46,7 @@
 		020D751125C0A1AA0016448E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0246F61225D34E2900FB6918 /* NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTests.swift; sourceTree = "<group>"; };
+		0246F62025D35B5300FB6918 /* NoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewController.swift; sourceTree = "<group>"; };
 		02563B4625C715D4004B565F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		02563B4F25C71EA7004B565F /* NotebooksAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotebooksAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02563B5125C71EA7004B565F /* NotebooksAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebooksAppTests.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				020D750E25C0A1AA0016448E /* LaunchScreen.storyboard */,
 				020D750625C0A1A90016448E /* Main.storyboard */,
 				028071D525D0856200C1253C /* NotebookTableViewController.swift */,
+				0246F62025D35B5300FB6918 /* NoteTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				02563B4725C715D4004B565F /* DataController.swift in Sources */,
 				020D750525C0A1A90016448E /* ViewController.swift in Sources */,
 				02563B6425C75A20004B565F /* NotebookMO.swift in Sources */,
+				0246F62125D35B5300FB6918 /* NoteTableViewController.swift in Sources */,
 				0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */,
 				028071D625D0856200C1253C /* NotebookTableViewController.swift in Sources */,
 				020D750125C0A1A90016448E /* AppDelegate.swift in Sources */,
