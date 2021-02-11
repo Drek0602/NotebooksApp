@@ -33,6 +33,16 @@ class NoteTableViewController: UITableViewController {
         
         guard let dataController = dataController else {return}
         
+        let managedObjectContext = dataController.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        
+        let noteTitleSortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+        
+        request.sortDescriptors = [noteTitleSortDescriptor]
+        
+        self.fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: <#T##NSManagedObjectContext#>, sectionNameKeyPath: <#T##String?#>, cacheName: <#T##String?#>)
+        
     }
 
 }
