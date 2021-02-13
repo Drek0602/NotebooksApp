@@ -118,6 +118,17 @@ class DataController: NSObject {
         
     }
     
+    //MARK: - Perform loading in background 
+    func performInBackground(_ closure: @escaping (NSManagedObjectContext) -> Void) {
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        
+        privateMOC.parent = viewContext
+        
+        privateMOC.perform {
+            closure(privateMOC)
+        }
+    }
+    
 }
 
 
@@ -125,32 +136,43 @@ class DataController: NSObject {
 extension DataController {
     
     func loadNotesIntoViewContext() {
-        let managedObjectContext = viewContext
-        //crear notas
-       guard let notebook = NotebookMO.createNotebook(createdAt: Date(),
-                                                      title: "notebookWithNote",
-                                                      in: managedObjectContext) else {return}
         
-        NoteMO.createNote(managedObjectContext: managedObjectContext,
-                          notebook: notebook,
-                          title: "Nota 1",
-                          createdAt: Date())
-        NoteMO.createNote(managedObjectContext: managedObjectContext,
-                          notebook: notebook,
-                          title: "Nota 2",
-                          createdAt: Date())
-        NoteMO.createNote(managedObjectContext: managedObjectContext,
-                          notebook: notebook,
-                          title: "Nota 3",
-                          createdAt: Date())
-        
-        let image = UIImage(named: "sketchbook")
-        if let dataImage = image?.pngData() {
-            let picture = PhotographMO.createPicture(imageData: dataImage, managedObjectContext: managedObjectContext)
+        performInBackground { (privateManagedObjectContext) in
+            let managedObjectContext = privateManagedObjectContext
             
-            notebook.photograph = picture
+            guard let notebook = NotebookMO.createNotebook(createdAt: Date(),
+                                                           title: "notebookWithNote",
+                                                           in: managedObjectContext) else {return}
+            
+            NoteMO.createNote(managedObjectContext: managedObjectContext,
+                              notebook: notebook,
+                              title: "Nota 1",
+                              createdAt: Date())
+            NoteMO.createNote(managedObjectContext: managedObjectContext,
+                              notebook: notebook,
+                              title: "Nota 2",
+                              createdAt: Date())
+            NoteMO.createNote(managedObjectContext: managedObjectContext,
+                              notebook: notebook,
+                              title: "Nota 3",
+                              createdAt: Date())
+            
+            let image = UIImage(named: "sketchbook")
+            if let dataImage = image?.pngData() {
+                let picture = PhotographMO.createPicture(imageData: dataImage, managedObjectContext: managedObjectContext)
+                
+                notebook.photograph = picture
+                
+            }
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                fatalError("unable to save from private MOC")
+            }
+            
+            
         }
-        
         
     }
     

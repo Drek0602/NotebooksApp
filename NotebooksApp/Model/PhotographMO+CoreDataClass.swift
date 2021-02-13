@@ -20,8 +20,7 @@ public class PhotographMO: NSManagedObject {
         picture?.imageData = imageData
         
         return picture
-        
-        
+    
     }
     
 }
