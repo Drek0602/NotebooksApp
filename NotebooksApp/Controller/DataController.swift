@@ -127,7 +127,7 @@ extension DataController {
         let managedObjectContext = viewContext
         //crear notas
        guard let notebook = NotebookMO.createNotebook(createdAt: Date(),
-                                                      title: "notebook1",
+                                                      title: "notebookWithNote",
                                                       in: managedObjectContext) else {return}
         
         NoteMO.createNote(managedObjectContext: managedObjectContext,

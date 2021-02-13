@@ -36,6 +36,9 @@ public class NotebookMO: NSManagedObject {
         return format.string(from: date)
     }
     
+    //Binary Large Data Objects, registro dentro de NSPErsistentStore SQLLite > 1MB
+    //CLOB = character large object de 128 bytes 1 millon de registro, es considerado un BLOB.
+    
     @discardableResult
     static func createNotebook(createdAt: Date,
                                title: String,

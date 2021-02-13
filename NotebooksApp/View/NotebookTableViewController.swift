@@ -81,11 +81,31 @@ class NotebookTableViewController: UITableViewController {
         
         cell.textLabel?.text = notebook.title
         if let createdAt = notebook.createdAt {
-            cell.detailTextLabel?.text = NotebookMO.textFrom(date: createdAt)
+            cell.detailTextLabel?.text = HelperDateFormatter.textFrom(date: createdAt)
         }
     
         return cell
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier,
+           segueIdentifier == "SEGUE_TO_NOTE" {
+            //encontrar o castear el notebooktableviewcontroller
+            //tenemos que encontrar el notebook que elegimos y setear el notebook
+            // luego setear el datacontroller
+            let destination = segue.destination as? NoteTableViewController
+            let indexPathSelected = tableView.indexPathForSelectedRow!
+            let selectedNotebook = fetchResultsController?.object(at: indexPathSelected) as? NotebookMO
+            
+            destination?.notebook = selectedNotebook
+            destination?.dataController = dataController
+            
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "SEGUE_TO_NOTE", sender: nil)
     }
 
     

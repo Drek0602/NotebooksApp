@@ -44,13 +44,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = tableNotebookViewcontroller
+        self.window?.rootViewController = UINavigationController(rootViewController: tableNotebookViewcontroller)
         self.window?.makeKeyAndVisible()
         
     }
     
     func preloadData() {
-        dataController?.loadNotebooksIntoViewContext()
+        dataController?.loadNotesIntoViewContext()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

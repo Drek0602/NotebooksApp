@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		020D34AE25D859EE00E3DF17 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D34AD25D859EE00E3DF17 /* NoteDetailViewController.swift */; };
+		020D34B425D8618600E3DF17 /* HelperDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D34B325D8618600E3DF17 /* HelperDateFormatter.swift */; };
 		020D750125C0A1A90016448E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D750025C0A1A90016448E /* AppDelegate.swift */; };
 		020D750325C0A1A90016448E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D750225C0A1A90016448E /* SceneDelegate.swift */; };
 		020D750525C0A1A90016448E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D750425C0A1A90016448E /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		020D34AD25D859EE00E3DF17 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
+		020D34B325D8618600E3DF17 /* HelperDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperDateFormatter.swift; sourceTree = "<group>"; };
 		020D74FD25C0A1A90016448E /* NotebooksApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotebooksApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		020D750025C0A1A90016448E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		020D750225C0A1A90016448E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,8 +157,9 @@
 			children = (
 				021CA6CE25D842EA00A07A61 /* PhotographMO+CoreDataClass.swift */,
 				0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */,
-				020D750925C0A1A90016448E /* NotebooksModel.xcdatamodeld */,
 				02563B6325C75A20004B565F /* NotebookMO.swift */,
+				020D750925C0A1A90016448E /* NotebooksModel.xcdatamodeld */,
+				020D34B325D8618600E3DF17 /* HelperDateFormatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				020D34B425D8618600E3DF17 /* HelperDateFormatter.swift in Sources */,
 				02563B4725C715D4004B565F /* DataController.swift in Sources */,
 				020D750525C0A1A90016448E /* ViewController.swift in Sources */,
 				021CA6D025D842EA00A07A61 /* PhotographMO+CoreDataClass.swift in Sources */,
