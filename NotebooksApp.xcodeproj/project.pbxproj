@@ -14,6 +14,7 @@
 		020D750B25C0A1A90016448E /* NotebooksModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 020D750925C0A1A90016448E /* NotebooksModel.xcdatamodeld */; };
 		020D750D25C0A1AA0016448E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020D750C25C0A1AA0016448E /* Assets.xcassets */; };
 		020D751025C0A1AA0016448E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 020D750E25C0A1AA0016448E /* LaunchScreen.storyboard */; };
+		021CA6D025D842EA00A07A61 /* PhotographMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021CA6CE25D842EA00A07A61 /* PhotographMO+CoreDataClass.swift */; };
 		0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */; };
 		0246F61325D34E2900FB6918 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F61225D34E2900FB6918 /* NotesTests.swift */; };
 		0246F62125D35B5300FB6918 /* NoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246F62025D35B5300FB6918 /* NoteTableViewController.swift */; };
@@ -44,6 +45,7 @@
 		020D750C25C0A1AA0016448E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		020D750F25C0A1AA0016448E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		020D751125C0A1AA0016448E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		021CA6CE25D842EA00A07A61 /* PhotographMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotographMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0246F61225D34E2900FB6918 /* NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTests.swift; sourceTree = "<group>"; };
 		0246F62025D35B5300FB6918 /* NoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		028071D225D0768400C1253C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				021CA6CE25D842EA00A07A61 /* PhotographMO+CoreDataClass.swift */,
 				0246F60625D345C800FB6918 /* NoteMO+CoreDataClass.swift */,
 				020D750925C0A1A90016448E /* NotebooksModel.xcdatamodeld */,
 				02563B6325C75A20004B565F /* NotebookMO.swift */,
@@ -257,6 +260,7 @@
 			files = (
 				02563B4725C715D4004B565F /* DataController.swift in Sources */,
 				020D750525C0A1A90016448E /* ViewController.swift in Sources */,
+				021CA6D025D842EA00A07A61 /* PhotographMO+CoreDataClass.swift in Sources */,
 				02563B6425C75A20004B565F /* NotebookMO.swift in Sources */,
 				0246F62125D35B5300FB6918 /* NoteTableViewController.swift in Sources */,
 				0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */,
