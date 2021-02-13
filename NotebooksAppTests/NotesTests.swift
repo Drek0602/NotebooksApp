@@ -56,10 +56,26 @@ class NotesTests: XCTestCase {
         
         let dataController = DataController(modelName: modelName, optionalStoreName: optionalStore) { (_) in }
         
-        let viewController = UIViewController()
-        //let
+        let notebook = NotebookMO.createNotebook(createdAt: Date(), title: "notebook1", in: dataController.viewContext)
         
+        let note = NoteMO.createNote(managedObjectContext: dataController.viewContext, notebook: notebook!, title: "note1", createdAt: Date())
         
+        let noteViewController = NoteTableViewController(dataController: dataController)
+        
+        noteViewController.notebook = notebook
+        
+        //carga la vista si es necesaria..
+        noteViewController.loadViewIfNeeded()
+        
+        let notes = noteViewController.fetchResultsController?.fetchedObjects as? [NoteMO]
+        
+        guard let firstFound = notes?.first else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertEqual(notes?.count, 1)
+        XCTAssertEqual(note, firstFound)
         
     }
     
