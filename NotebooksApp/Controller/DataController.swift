@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class DataController: NSObject {
     
@@ -143,6 +144,13 @@ extension DataController {
                           title: "Nota 3",
                           createdAt: Date())
         
+        let image = UIImage(named: "sketchbook")
+        if let dataImage = image?.pngData() {
+            let picture = PhotographMO.createPicture(imageData: dataImage, managedObjectContext: managedObjectContext)
+            
+            notebook.photograph = picture
+        }
+        
         
     }
     
@@ -157,5 +165,18 @@ extension DataController {
         NotebookMO.createNotebook(createdAt: Date(), title: "notebook3", in: managedObjectContext)
         
     }
+    
+    /*func loadPicturesIntoViewContext() {
+        let managedObjectContext = viewContext
+        let imageData = UIImage(named: "")
+        
+        PhotographMO.createPicture(imageData: Data, managedObjectContext: managedObjectContext)
+        
+        NotebookMO.createNotebook(createdAt: Date(), title: "notebook2", in: managedObjectContext)
+        
+        NotebookMO.createNotebook(createdAt: Date(), title: "notebook3", in: managedObjectContext)
+        
+    }*/
+    
     
 }

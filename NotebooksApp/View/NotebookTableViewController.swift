@@ -83,6 +83,11 @@ class NotebookTableViewController: UITableViewController {
         if let createdAt = notebook.createdAt {
             cell.detailTextLabel?.text = HelperDateFormatter.textFrom(date: createdAt)
         }
+        
+        if let picture = notebook.photograph,
+           let imageData = picture.imageData {
+            cell.imageView?.image = UIImage(data: imageData)
+        }
     
         return cell
         
