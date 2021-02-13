@@ -13,7 +13,7 @@ class NoteTableViewController: UITableViewController {
     var dataController: DataController?
     var fetchResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
-    
+    var notebook: NotebookMO?
     
     public convenience init(dataController: DataController) {
         self.init()
@@ -31,17 +31,26 @@ class NoteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let dataController = dataController else {return}
+        guard let dataController = dataController, let notebook = notebook else {return}
         
         let managedObjectContext = dataController.viewContext
         
+        //create fetchRequest
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         
         let noteTitleSortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         
+        request.predicate = NSPredicate(format: "notebook == %@", notebook)
         request.sortDescriptors = [noteTitleSortDescriptor]
         
-        self.fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: <#T##NSManagedObjectContext#>, sectionNameKeyPath: <#T##String?#>, cacheName: <#T##String?#>)
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do{
+            try fetchResultsController?.performFetch()
+        } catch {
+            fatalError("unable to fetch notes from notebook: \(error.localizedDescription)")
+        }
+       
         
     }
 

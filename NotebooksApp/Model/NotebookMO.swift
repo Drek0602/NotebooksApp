@@ -16,6 +16,7 @@ public class NotebookMO: NSManagedObject {
         super.awakeFromInsert()
         
         print("notebook created")
+       
         
     }
     
