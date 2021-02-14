@@ -10,10 +10,35 @@ import CoreData
 
 class NoteTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    //MARK: - Properties
+    
     var dataController: DataController?
     var fetchResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
     var notebook: NotebookMO?
+    
+    //MARK: - Initializers
+    
+    init() {
+        super.init(style: .grouped)
+    }
+    
+    public convenience init(dataController: DataController) {
+        self.init()
+        self.dataController = dataController
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initializeFetchResultsController()
+        
+        setupNavigationItem()
+        
+    }
     
     func initializeFetchResultsController() {
         guard let dataController = dataController, let notebook = notebook else {return}
@@ -40,26 +65,6 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         }
     }
     
-    init() {
-        super.init(style: .grouped)
-    }
-    
-    public convenience init(dataController: DataController) {
-        self.init()
-        self.dataController = dataController
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initializeFetchResultsController()
-        
-        setupNavigationItem()
-        
-    }
     
     func setupNavigationItem(){
         let addNoteBarButtonItem = UIBarButtonItem(title: "Add note", style: .done, target: self, action: #selector(createAndPresentPicker))
@@ -100,6 +105,8 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         
     }
     
+    //MARK: - TableView methods
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchResultsController?.sections?.count ?? 0
         
@@ -135,6 +142,23 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
     
         return cell
         
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let note = self.fetchResultsController?.object(at: indexPath) as? NoteMO else {
+            fatalError("no indexpath")
+        }
+        self.performSegue(withIdentifier: "SEGUE_TO_NOTE_DETAIL", sender: note)
+    }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as? NoteDetailViewController
+        if let note = sender as? NoteMO {
+            destination?.note = note
+            destination?.dataController = dataController
+        }
     }
     
 
@@ -181,6 +205,22 @@ extension NoteTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+}
+
+
+
+//MARK: - SearchBar Function
+extension NoteTableViewController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, searchText: String) {
+        guard let searTextEntered = searchBar.text else {
+            return
+        }
+        
+    //fetchNotes
+        
+    }
+    
+    
 }
 
 

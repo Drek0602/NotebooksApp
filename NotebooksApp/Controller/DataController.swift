@@ -57,6 +57,38 @@ class DataController: NSObject {
         
     }
     
+    
+    
+    
+    //function to create the managedObjectModel
+    static func managedObjectModel(with name: String) -> NSManagedObjectModel {
+        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
+            fatalError("Error: could not find model")
+        }
+        
+        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Error: could not initialize model from: \(modelURL)")
+        }
+        
+        return managedObjectModel
+        
+    }
+    
+    //MARK: - Perform loading in background 
+    func performInBackground(_ closure: @escaping (NSManagedObjectContext) -> Void) {
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        
+        privateMOC.parent = viewContext
+        
+        privateMOC.perform {
+            closure(privateMOC)
+        }
+    }
+    
+}
+
+//MARK: - Fetch - Save - Delete - Reset
+extension DataController {
     func fetchNotebooks(using fetchRequest: NSFetchRequest<NSFetchRequestResult>) -> [NotebookMO]? {
         
         do{
@@ -102,36 +134,11 @@ class DataController: NSObject {
         }
     
     }
-    
-    
-    //function to create the managedObjectModel
-    static func managedObjectModel(with name: String) -> NSManagedObjectModel {
-        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
-            fatalError("Error: could not find model")
-        }
-        
-        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalError("Error: could not initialize model from: \(modelURL)")
-        }
-        
-        return managedObjectModel
-        
-    }
-    
-    //MARK: - Perform loading in background 
-    func performInBackground(_ closure: @escaping (NSManagedObjectContext) -> Void) {
-        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        
-        privateMOC.parent = viewContext
-        
-        privateMOC.perform {
-            closure(privateMOC)
-        }
-    }
-    
 }
+    
+    
 
-
+//MARK: - create Notebook - Note - Pictures
 
 extension DataController {
     
@@ -260,6 +267,5 @@ extension DataController {
     
     
 }
-    
-    
+
 
