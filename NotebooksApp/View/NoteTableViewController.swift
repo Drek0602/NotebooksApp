@@ -15,11 +15,6 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
     
     var notebook: NotebookMO?
     
-    public convenience init(dataController: DataController) {
-        self.init()
-        self.dataController = dataController
-    }
-    
     func initializeFetchResultsController() {
         guard let dataController = dataController, let notebook = notebook else {return}
         
@@ -47,6 +42,11 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
     
     init() {
         super.init(style: .grouped)
+    }
+    
+    public convenience init(dataController: DataController) {
+        self.init()
+        self.dataController = dataController
     }
     
     required init?(coder: NSCoder) {

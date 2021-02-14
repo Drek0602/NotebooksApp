@@ -24,6 +24,7 @@
 		02563B5225C71EA7004B565F /* NotebooksAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B5125C71EA7004B565F /* NotebooksAppTests.swift */; };
 		02563B6425C75A20004B565F /* NotebookMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02563B6325C75A20004B565F /* NotebookMO.swift */; };
 		0256BB7C25D966DC00583D95 /* DownSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256BB7B25D966DC00583D95 /* DownSampler.swift */; };
+		0256BB8325D98CB300583D95 /* PictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256BB8225D98CB300583D95 /* PictureCollectionViewCell.swift */; };
 		028071D625D0856200C1253C /* NotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028071D525D0856200C1253C /* NotebookTableViewController.swift */; };
 		028071DA25D0A60F00C1253C /* NotebookTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028071D925D0A60F00C1253C /* NotebookTableViewControllerTests.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		02563B5325C71EA7004B565F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02563B6325C75A20004B565F /* NotebookMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookMO.swift; sourceTree = "<group>"; };
 		0256BB7B25D966DC00583D95 /* DownSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownSampler.swift; sourceTree = "<group>"; };
+		0256BB8225D98CB300583D95 /* PictureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		028071D525D0856200C1253C /* NotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookTableViewController.swift; sourceTree = "<group>"; };
 		028071D925D0A60F00C1253C /* NotebookTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookTableViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +153,7 @@
 				028071D525D0856200C1253C /* NotebookTableViewController.swift */,
 				0246F62025D35B5300FB6918 /* NoteTableViewController.swift */,
 				020D34AD25D859EE00E3DF17 /* NoteDetailViewController.swift */,
+				0256BB8225D98CB300583D95 /* PictureCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				021CA6D025D842EA00A07A61 /* PhotographMO+CoreDataClass.swift in Sources */,
 				02563B6425C75A20004B565F /* NotebookMO.swift in Sources */,
 				0246F62125D35B5300FB6918 /* NoteTableViewController.swift in Sources */,
+				0256BB8325D98CB300583D95 /* PictureCollectionViewCell.swift in Sources */,
 				0246F60825D345C800FB6918 /* NoteMO+CoreDataClass.swift in Sources */,
 				020D34AE25D859EE00E3DF17 /* NoteDetailViewController.swift in Sources */,
 				028071D625D0856200C1253C /* NotebookTableViewController.swift in Sources */,

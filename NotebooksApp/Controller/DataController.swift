@@ -255,5 +255,11 @@ extension DataController {
         
     }
     
+    //add pic to details
+    func addPictureDetail(selectedImage: UIImage, urlImage: URL, note: NoteMO) {}
+    
     
 }
+    
+    
+

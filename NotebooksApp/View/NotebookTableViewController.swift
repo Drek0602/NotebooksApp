@@ -26,13 +26,7 @@ class NotebookTableViewController: UITableViewController {
         super.init(coder: coder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //dataController = DataController(modelName: "NotebooksModel", optionalStoreName: nil, completionHandler: { _ in })
-        
-        //dataController?.loadNotebooksIntoViewContext()
-        
+    func initializeFetchResultsController() {
         guard let dataController = dataController else {return}
         
         let managedObjectContext = dataController.viewContext
@@ -59,6 +53,36 @@ class NotebookTableViewController: UITableViewController {
     }
     
     
+    //MARK: - ViewDidLoad
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        initializeFetchResultsController()
+        
+        let loadDataBarButton = UIBarButtonItem(title: "Load", style: .done, target: self, action: #selector(loadData))
+        
+        let deleteDataBarButton = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteData))
+        
+        navigationItem.leftBarButtonItems = [loadDataBarButton, deleteDataBarButton]
+        
+    }
+    
+    @objc
+    func loadData() {
+        dataController?.loadNotesinBackgroundContext()
+    }
+    
+    @objc
+    func deleteData() {
+        dataController?.save()
+        dataController?.delete()
+        dataController?.reset()
+        initializeFetchResultsController()
+        tableView.reloadData()
+    }
+    
+    //MARK: - TableView Functions
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchResultsController?.sections?.count ?? 0
         

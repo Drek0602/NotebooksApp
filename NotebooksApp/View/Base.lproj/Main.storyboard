@@ -65,9 +65,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="2GV-Rj-8YR">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" textLabel="MXp-TX-OkX" detailTextLabel="E2f-oz-4sB" style="IBUITableViewCellStyleSubtitle" id="HDA-rX-rqF">
-                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HDA-rX-rqF" id="GoP-sX-Rqi">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
@@ -97,21 +102,24 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ewp-xy-kFh"/>
+                    <connections>
+                        <segue destination="8fh-zb-bAy" kind="show" identifier="SEGUE_TO_NOTE_DETAIL" id="b4F-5Y-Hjt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sRf-OL-EsI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1638" y="-585"/>
         </scene>
-        <!--View Controller-->
+        <!--Note Detail View Controller-->
         <scene sceneID="xyh-sU-heg">
             <objects>
-                <viewController id="8fh-zb-bAy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoteDetailViewController" id="8fh-zb-bAy" customClass="NoteDetailViewController" customModule="NotebooksApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O9X-8d-BFE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ahg-jr-rBU">
-                                <rect key="frame" x="8" y="116" width="398" height="128"/>
+                                <rect key="frame" x="8" y="160" width="398" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="tK1-ZU-Vkn"/>
@@ -122,7 +130,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VEr-xZ-QD5">
-                                <rect key="frame" x="20" y="297" width="386" height="565"/>
+                                <rect key="frame" x="20" y="341" width="386" height="521"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cpq-PP-9ob">
                                     <size key="itemSize" width="128" height="128"/>
@@ -131,7 +139,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1DP-Tv-JkT">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pictureCell" id="1DP-Tv-JkT" customClass="PictureCollectionViewCell" customModule="NotebooksApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oiK-kr-umL">
@@ -149,11 +157,14 @@
                                                 <constraint firstItem="YXz-HA-Drf" firstAttribute="leading" secondItem="oiK-kr-umL" secondAttribute="leading" id="wE6-v7-iuu"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageDetailView" destination="YXz-HA-Drf" id="tWC-xA-FKL"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qb8-kA-9CC">
-                                <rect key="frame" x="8" y="74" width="398" height="34"/>
+                                <rect key="frame" x="8" y="118" width="398" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -174,10 +185,16 @@
                             <constraint firstItem="Qb8-kA-9CC" firstAttribute="top" secondItem="FB9-4D-GZx" secondAttribute="top" constant="30" id="wmg-Kz-kuF"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="chk-pj-bAo"/>
+                    <connections>
+                        <outlet property="collectionView" destination="VEr-xZ-QD5" id="e7d-SQ-1aO"/>
+                        <outlet property="contentUITextView" destination="ahg-jr-rBU" id="6nb-sg-vU0"/>
+                        <outlet property="titleUITextField" destination="Qb8-kA-9CC" id="Aky-Um-fRE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tFs-jX-VVQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2394.202898550725" y="-594.64285714285711"/>
+            <point key="canvasLocation" x="2425" y="-585"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ub7-M8-tdh">
