@@ -50,7 +50,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func preloadData() {
-        dataController?.loadNotesinBackgroundContext()
+        
+        guard !UserDefaults.standard.bool(forKey: "hasPreloadData") else {return}
+        UserDefaults.standard.set(true, forKey: "hasPreloadData")
+        
+        dataController?.loadNotesIntoViewContext()
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
