@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class NoteTableViewController: UITableViewController {
+class NoteTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     var dataController: DataController?
     var fetchResultsController: NSFetchedResultsController<NSFetchRequestResult>?
@@ -20,17 +20,7 @@ class NoteTableViewController: UITableViewController {
         self.dataController = dataController
     }
     
-    init() {
-        super.init(style: .grouped)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func initializeFetchResultsController() {
         guard let dataController = dataController, let notebook = notebook else {return}
         
         let managedObjectContext = dataController.viewContext
@@ -53,8 +43,36 @@ class NoteTableViewController: UITableViewController {
         } catch {
             fatalError("unable to fetch notes from notebook: \(error.localizedDescription)")
         }
-       
+    }
+    
+    init() {
+        super.init(style: .grouped)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initializeFetchResultsController()
         
+        setupNavigationItem()
+        
+    }
+    
+    func setupNavigationItem(){
+        let addNoteBarButtonItem = UIBarButtonItem(title: "Add note", style: .done, target: self, action: #selector(createAndPresentPicker))
+        
+        navigationItem.rightBarButtonItem = addNoteBarButtonItem
+        
+    }
+    
+    @objc
+    func createAndPresentPicker(){
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

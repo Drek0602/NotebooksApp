@@ -225,13 +225,15 @@ extension DataController {
         
     }
     
-    func addPicture(imageData: Data, in note: NoteMO) {
+    func addPicture(imageData: Data, notebook: NotebookMO) {
     
         let managedObjectContext = viewContext
         
         let photographMO = PhotographMO.createPicture(imageData: imageData, managedObjectContext: managedObjectContext)
         
-        note.photograph = photographMO
+        let note = NoteMO.createNote(managedObjectContext: managedObjectContext, notebook: notebook, title: "note title", createdAt: Date())
+        
+        note?.photograph = photographMO
         
     }
     
