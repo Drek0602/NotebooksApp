@@ -225,15 +225,33 @@ extension DataController {
         
     }
     
-    func addPicture(imageData: Data, notebook: NotebookMO) {
+    func addNote(urlImage: URL, notebook: NotebookMO) {
+        
+        performInBackground { (managedObjectContext) in
+            
+            guard let imageThumbnail = DownSampler.downsample(imageAt: urlImage),
+                  let imageThumbnailData = imageThumbnail.pngData()  else {
+                return
+            }
+            
+            let notebookID = notebook.objectID
+            let copyNotebook = managedObjectContext.object(with: notebookID) as! NotebookMO
+            
+            let photographMO = PhotographMO.createPicture(imageData: imageThumbnailData, managedObjectContext: managedObjectContext)
+            
+            let note = NoteMO.createNote(managedObjectContext: managedObjectContext, notebook: copyNotebook, title: "note title", createdAt: Date())
+            
+            note?.photograph = photographMO
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                fatalError("unable to create note with thumbnail image in background")
+            }
+            
+        }
     
-        let managedObjectContext = viewContext
         
-        let photographMO = PhotographMO.createPicture(imageData: imageData, managedObjectContext: managedObjectContext)
-        
-        let note = NoteMO.createNote(managedObjectContext: managedObjectContext, notebook: notebook, title: "note title", createdAt: Date())
-        
-        note?.photograph = photographMO
         
     }
     

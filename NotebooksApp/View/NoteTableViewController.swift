@@ -73,6 +73,31 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary),
+           let availableTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+            picker.mediaTypes = availableTypes
+            
+        }
+        
+        present(picker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true) { [weak self] in
+               if let url = info[.imageURL] as? URL {
+                // data controller para poder crear la nota
+                if let notebook = self?.notebook {
+                    self?.dataController?.addNote(urlImage: url, notebook: notebook)
+                    
+                }
+                
+            }
+            
+        }
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,6 +123,14 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         cell.textLabel?.text = note.title
         if let createdAt = note.createdAt {
             cell.detailTextLabel?.text = HelperDateFormatter.textFrom(date: createdAt)
+        }
+        
+        if let imagePicture = note.photograph,
+           let imageData = imagePicture.imageData,
+           let imageUI = UIImage(data: imageData) {
+            
+            cell.imageView?.image = imageUI
+            
         }
     
         return cell
