@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func preloadData() {
-        dataController?.loadNotesIntoViewContext()
+        dataController?.loadNotesinBackgroundContext()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

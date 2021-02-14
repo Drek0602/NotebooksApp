@@ -135,7 +135,7 @@ class DataController: NSObject {
 
 extension DataController {
     
-    func loadNotesIntoViewContext() {
+    func loadNotesinBackgroundContext() {
         
         performInBackground { (privateManagedObjectContext) in
             let managedObjectContext = privateManagedObjectContext
@@ -176,6 +176,43 @@ extension DataController {
         
     }
     
+    func loadNotesIntoViewContext(){
+        let managedObjectContext = viewContext
+        
+        guard let notebook = NotebookMO.createNotebook(createdAt: Date(),
+                                                       title: "notebookWithNote",
+                                                       in: managedObjectContext) else {return}
+        
+        NoteMO.createNote(managedObjectContext: managedObjectContext,
+                          notebook: notebook,
+                          title: "Nota 1",
+                          createdAt: Date())
+        NoteMO.createNote(managedObjectContext: managedObjectContext,
+                          notebook: notebook,
+                          title: "Nota 2",
+                          createdAt: Date())
+        NoteMO.createNote(managedObjectContext: managedObjectContext,
+                          notebook: notebook,
+                          title: "Nota 3",
+                          createdAt: Date())
+        
+        let image = UIImage(named: "sketchbook")
+        if let dataImage = image?.pngData() {
+            let picture = PhotographMO.createPicture(imageData: dataImage, managedObjectContext: managedObjectContext)
+            
+            notebook.photograph = picture
+            
+        }
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            fatalError("")
+            
+        }
+        
+    }
+    
     
     func loadNotebooksIntoViewContext() {
         let managedObjectContext = viewContext
@@ -188,17 +225,15 @@ extension DataController {
         
     }
     
-    /*func loadPicturesIntoViewContext() {
+    func addPicture(imageData: Data, in note: NoteMO) {
+    
         let managedObjectContext = viewContext
-        let imageData = UIImage(named: "")
         
-        PhotographMO.createPicture(imageData: Data, managedObjectContext: managedObjectContext)
+        let photographMO = PhotographMO.createPicture(imageData: imageData, managedObjectContext: managedObjectContext)
         
-        NotebookMO.createNotebook(createdAt: Date(), title: "notebook2", in: managedObjectContext)
+        note.photograph = photographMO
         
-        NotebookMO.createNotebook(createdAt: Date(), title: "notebook3", in: managedObjectContext)
-        
-    }*/
+    }
     
     
 }
