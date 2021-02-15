@@ -133,7 +133,7 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         }
         
         if let imagePicture = note.photograph,
-           let imageData = imagePicture.imageData,
+           let imageData = (imagePicture.allObjects.first as? PhotographMO)?.imageData,
            let imageUI = UIImage(data: imageData) {
             
             cell.imageView?.image = imageUI

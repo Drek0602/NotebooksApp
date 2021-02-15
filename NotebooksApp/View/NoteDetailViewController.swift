@@ -87,7 +87,22 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
         titleUITextField.text = note?.title
         contentUITextView.text =  note?.contents
         initializeFetchResultsController()
-        
+        setUpNavigationItem()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        note?.contents = contentUITextView.text
+        note?.title = titleUITextField.text
+    }
+    
+    func setUpNavigationItem() {
+        let addNoteBarButtomItem = addNoteNavigationBarButtom()
+        navigationItem.rightBarButtonItems = [addNoteBarButtomItem]
+    }
+    
+    func addNoteNavigationBarButtom() -> UIBarButtonItem {
+        UIBarButtonItem(title: "Add image", style: .done, target: nil, action: #selector(createAndPresentPicker))
     }
     
     //MARK: - Picker functions
@@ -107,11 +122,21 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
         
     }
     
-    //TODO
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {}
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) { [weak self] in
+            
+            if let selectedImage = info[.originalImage] as? UIImage,
+               let urlImage = info[.imageURL] as? URL {
+                self?.addNewPicNoteDetail(selectedImage: selectedImage, url: urlImage)
+            }
+        }
+    }
     
     //MARK: - AddPicToNote TODO
-    func addNewPicNoteDetail(selectedImage: UIImage, url: URL?) {}
+    func addNewPicNoteDetail(selectedImage: UIImage, url: URL) {
+        guard let note = note else {return}
+        dataController?.addPhotograph(with: selectedImage, and: url, in: note)
+    }
 
     func setupCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()

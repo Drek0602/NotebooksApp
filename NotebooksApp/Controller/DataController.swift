@@ -151,26 +151,26 @@ extension DataController {
                                                            title: "notebookWithNote",
                                                            in: managedObjectContext) else {return}
             
+            let image = UIImage(named: "sketchbook")
+            guard let dataImage = image?.pngData(),
+                let picture = PhotographMO.createPhotograph(imageData: dataImage, managedObjectContext: managedObjectContext) else {return}
+            
             NoteMO.createNote(managedObjectContext: managedObjectContext,
                               notebook: notebook,
                               title: "Nota 1",
+                              photograph: picture,
                               createdAt: Date())
             NoteMO.createNote(managedObjectContext: managedObjectContext,
                               notebook: notebook,
                               title: "Nota 2",
+                              photograph: picture,
                               createdAt: Date())
             NoteMO.createNote(managedObjectContext: managedObjectContext,
                               notebook: notebook,
                               title: "Nota 3",
+                              photograph: picture,
                               createdAt: Date())
-            
-            let image = UIImage(named: "sketchbook")
-            if let dataImage = image?.pngData() {
-                let picture = PhotographMO.createPicture(imageData: dataImage, managedObjectContext: managedObjectContext)
-                
-                notebook.photograph = picture
-                
-            }
+        
             
             do {
                 try managedObjectContext.save()
@@ -190,26 +190,27 @@ extension DataController {
                                                        title: "notebookWithNote",
                                                        in: managedObjectContext) else {return}
         
+        let image = UIImage(named: "sketchbook")
+        guard let dataImage = image?.pngData(),
+            let picture = PhotographMO.createPhotograph(imageData: dataImage, managedObjectContext: managedObjectContext) else {return}
+        
         NoteMO.createNote(managedObjectContext: managedObjectContext,
                           notebook: notebook,
                           title: "Nota 1",
+                          photograph: picture,
                           createdAt: Date())
         NoteMO.createNote(managedObjectContext: managedObjectContext,
                           notebook: notebook,
                           title: "Nota 2",
+                          photograph: picture,
                           createdAt: Date())
         NoteMO.createNote(managedObjectContext: managedObjectContext,
                           notebook: notebook,
                           title: "Nota 3",
+                          photograph: picture,
                           createdAt: Date())
         
-        let image = UIImage(named: "sketchbook")
-        if let dataImage = image?.pngData() {
-            let picture = PhotographMO.createPicture(imageData: dataImage, managedObjectContext: managedObjectContext)
-            
-            notebook.photograph = picture
-            
-        }
+        
         
         do {
             try managedObjectContext.save()
@@ -220,52 +221,92 @@ extension DataController {
         
     }
     
-    
     func loadNotebooksIntoViewContext() {
-        let managedObjectContext = viewContext
         
-        NotebookMO.createNotebook(createdAt: Date(), title: "notebook1", in: managedObjectContext)
-        
-        NotebookMO.createNotebook(createdAt: Date(), title: "notebook2", in: managedObjectContext)
-        
-        NotebookMO.createNotebook(createdAt: Date(), title: "notebook3", in: managedObjectContext)
-        
-    }
+    let managedObjectContext = viewContext
     
-    func addNote(urlImage: URL, notebook: NotebookMO) {
-        
-        performInBackground { (managedObjectContext) in
-            
-            guard let imageThumbnail = DownSampler.downsample(imageAt: urlImage),
-                  let imageThumbnailData = imageThumbnail.pngData()  else {
-                return
-            }
-            
-            let notebookID = notebook.objectID
-            let copyNotebook = managedObjectContext.object(with: notebookID) as! NotebookMO
-            
-            let photographMO = PhotographMO.createPicture(imageData: imageThumbnailData, managedObjectContext: managedObjectContext)
-            
-            let note = NoteMO.createNote(managedObjectContext: managedObjectContext, notebook: copyNotebook, title: "note title", createdAt: Date())
-            
-            note?.photograph = photographMO
+    NotebookMO.createNotebook(createdAt: Date(), title: "notebook1", in: managedObjectContext)
+    
+    NotebookMO.createNotebook(createdAt: Date(), title: "notebook2", in: managedObjectContext)
+    
+    NotebookMO.createNotebook(createdAt: Date(), title: "notebook3", in: managedObjectContext)
+    
+}
+    
+}
+
+//MARK: - addNotebook, addNote, addPhotograph
+extension DataController {
+    func addNotebook() {
+        performInBackground({ (managedObjectContext) in
+            NotebookMO.createNotebook(createdAt: Date(), title: "Notebook", in: managedObjectContext)
             
             do {
                 try managedObjectContext.save()
             } catch {
-                fatalError("unable to create note with thumbnail image in background")
+                fatalError("Failure to save context: \(error)")
             }
-            
-        }
-    
-        
-        
+        })
     }
     
-    //add pic to details
-    func addPictureDetail(selectedImage: UIImage, urlImage: URL, note: NoteMO) {}
+    func addNote(urlImage: URL, notebook: NotebookMO) {
     
-    
+    performInBackground { (managedObjectContext) in
+        
+        let notebookMOObjectID = notebook.objectID
+        let copyNotebook = managedObjectContext.object(with: notebookMOObjectID) as! NotebookMO
+        
+        //downsampling of thumbnail
+        guard let imageThumbnail = DownSampler.downsample(imageAt: urlImage),
+                let imageThumbnailData = imageThumbnail.pngData()  else {
+            return
+        }
+        
+        //create photograph
+        guard let photographMO = PhotographMO.createPhotograph(imageData: imageThumbnailData, managedObjectContext: managedObjectContext) else {return}
+        
+        //create Note
+        NoteMO.createNote(managedObjectContext: managedObjectContext, notebook: copyNotebook, title: "note title", photograph: photographMO, createdAt: Date())
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            fatalError("unable to create note with thumbnail image in background")
+        }
+        
+    }
 }
+    //add pic to details
+    func addPhotograph(with selectedImage: UIImage, and urlImage: URL?, in note: NoteMO) {
+        performInBackground({ [weak note] (managedObjectContext) in
+            guard let note = note else {
+                return
+            }
+            
+            func saveImage(image: UIImage) {
+                guard let imageData = image.pngData(),
+                      let photograph = PhotographMO.createPhotograph(imageData: imageData, managedObjectContext: managedObjectContext) else {
+                    fatalError("couldn't create photograh")
+                }
+                
+                NoteMO.addPhoto(note: note, picture: photograph, managedObjectContext: managedObjectContext)
+            }
+            
+            if let urlImage = urlImage,
+               let thumbnailImage = DownSampler.downsample(imageAt: urlImage) {
+                saveImage(image: thumbnailImage)
+            } else {
+                saveImage(image: selectedImage)
+            }
+        })
+    }
+}
+
+
+        
+
+
+    
+    
 
 

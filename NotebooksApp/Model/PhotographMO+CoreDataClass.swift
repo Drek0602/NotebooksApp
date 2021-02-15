@@ -13,7 +13,7 @@ import CoreData
 public class PhotographMO: NSManagedObject {
     
     @discardableResult //
-    static func createPicture(imageData: Data, managedObjectContext: NSManagedObjectContext) -> PhotographMO? {
+    static func createPhotograph(imageData: Data, managedObjectContext: NSManagedObjectContext) -> PhotographMO? {
         
         let picture = NSEntityDescription.insertNewObject(forEntityName: "Photograph", into: managedObjectContext) as? PhotographMO
         
