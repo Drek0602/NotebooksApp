@@ -57,9 +57,6 @@ class DataController: NSObject {
         
     }
     
-    
-    
-    
     //function to create the managedObjectModel
     static func managedObjectModel(with name: String) -> NSManagedObjectModel {
         guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
@@ -86,6 +83,8 @@ class DataController: NSObject {
     }
     
 }
+
+
 
 //MARK: - Fetch - Save - Delete - Reset
 extension DataController {
@@ -138,9 +137,23 @@ extension DataController {
     
     
 
-//MARK: - create Notebook - Note - Pictures
 
+//MARK: - loadInto
 extension DataController {
+    static func preloadData(managedObjectContext: NSManagedObjectContext) {
+        let notebook = NotebookMO.createNotebook(createdAt: Date(), title: "notebook", in: managedObjectContext)
+        
+        let note = NoteMO.createNote(managedObjectContext: managedObjectContext, title: "note", createdAt: Date())
+        
+        note?.notebook = notebook
+        
+        do{
+            try managedObjectContext.save()
+        } catch {
+            fatalError("Unable to save context: \(error.localizedDescription)")
+        }
+        
+    }
     
     func loadNotesinBackgroundContext() {
         
@@ -276,7 +289,7 @@ extension DataController {
         
     }
 }
-    //add pic to details
+    
     func addPhotograph(with selectedImage: UIImage, and urlImage: URL?, in note: NoteMO) {
         performInBackground({ [weak note] (managedObjectContext) in
             guard let note = note else {
