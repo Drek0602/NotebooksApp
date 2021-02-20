@@ -103,6 +103,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="ewp-xy-kFh"/>
                     <connections>
+                        <outlet property="searchBar" destination="2GV-Rj-8YR" id="gbf-fG-ybZ"/>
                         <segue destination="8fh-zb-bAy" kind="show" identifier="SEGUE_TO_NOTE_DETAIL" id="b4F-5Y-Hjt"/>
                     </connections>
                 </tableViewController>

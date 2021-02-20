@@ -10,8 +10,11 @@ import CoreData
 
 class NoteTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    //MARK: - Properties
+    //MARK: - IBOutlets
+    @IBOutlet weak var searchBar: UISearchBar!
     
+    
+    //MARK: - Properties
     var dataController: DataController?
     var fetchResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
