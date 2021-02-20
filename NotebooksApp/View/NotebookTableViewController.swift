@@ -70,7 +70,9 @@ class NotebookTableViewController: UITableViewController {
     
     @objc
     func loadData() {
-        dataController?.loadNotesinBackgroundContext()
+        dataController?.performInBackground({ (managedObjectContext) in
+            DataController.preloadData(managedObjectContext: managedObjectContext)
+        })
     }
     
     @objc
@@ -108,14 +110,13 @@ class NotebookTableViewController: UITableViewController {
             cell.detailTextLabel?.text = HelperDateFormatter.textFrom(date: createdAt)
         }
         
-        if let picture = notebook.photograph,
-           let imageData = picture.imageData {
-            cell.imageView?.image = UIImage(data: imageData)
-        }
-    
+        cell.imageView?.image = UIImage(data: notebook.image ?? Data())
+        
         return cell
         
     }
+    
+    //MARK: - Navigation - prepareforSegue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segueIdentifier = segue.identifier,
