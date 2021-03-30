@@ -16,7 +16,13 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
     
     //MARK: - Properties
     var dataController: DataController?
-    var fetchResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    var fetchResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            fetchResultsController?.delegate = self
+            executeSearch()
+            tableView.reloadData()
+        }
+    }
     
     var notebook: NotebookMO?
     
@@ -35,8 +41,10 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         super.init(coder: coder)
     }
 
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = notebook?.title
         initializeFetchResultsController()
         setupNavigationItem()
         
@@ -72,15 +80,28 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         let sortByTitle = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sortByTitle]
         request.returnsObjectsAsFaults = false
+        
         request.predicate = NSPredicate(format: "notebook == %@ AND title contains[cd] %@", notebook, title)
         
         guard let managedObjectContext = dataController?.viewContext else {return}
+        
         fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
         
     }
     
+    func executeSearch() {
+        if let fetchedResult = fetchResultsController {
+            do {
+                try fetchedResult.performFetch()
+            } catch let error as NSError {
+                print("Error while trying to perform search: \n\(error)\n\(String(describing: fetchResultsController))")
+            }
+        }
+    }
     
+    
+    //MARK: - Navigation items setup
     func setupNavigationItem(){
         let addNoteBarButtonItem = UIBarButtonItem(title: "Add note", style: .done, target: self, action: #selector(createAndPresentPicker))
         
@@ -120,8 +141,8 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         
     }
     
-    //MARK: - TableView methods
     
+    //MARK: - TableView methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchResultsController?.sections?.count ?? 0
         
@@ -166,8 +187,8 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         self.performSegue(withIdentifier: "SEGUE_TO_NOTE_DETAIL", sender: note)
     }
     
-    //MARK: - Navigation
     
+    //MARK: - Navigation-Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? NoteDetailViewController
         if let note = sender as? NoteMO {
@@ -222,9 +243,7 @@ extension NoteTableViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-
-
-//MARK: - SearchBar Function
+//MARK: - SearchBar Delegate
 extension NoteTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let searchTextEntered = searchBar.text else {return}

@@ -24,7 +24,9 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
+    ///The BlockOperation class is a concrete subclass of Operation that manages the concurrent execution of one or more blocks. You can use this object to execute several blocks at once without having to create separate operation objects for each.
     private var blockOperation = BlockOperation()
+    
     
     //MARK: - Initializers
     
@@ -53,12 +55,8 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
     func initializeFetchResultsController() {
         
         guard let dataController = dataController, let note = note else {return}
-        
         let managedObjectContext = dataController.viewContext
-        
-        //create fetchRequest
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Photograph")
-        
         let photographDateSortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         
         request.predicate = NSPredicate(format: "note == %@", note)
@@ -95,6 +93,7 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
         note?.title = titleUITextField.text
     }
     
+    //MARK: - Navigation items setup
     func setUpNavigationItem() {
         let addNoteBarButtomItem = addNoteNavigationBarButtom()
         navigationItem.rightBarButtonItems = [addNoteBarButtomItem]
