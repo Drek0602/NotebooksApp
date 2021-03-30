@@ -38,21 +38,17 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeFetchResultsController()
-        
         setupNavigationItem()
         
     }
     
     func initializeFetchResultsController() {
         guard let dataController = dataController, let notebook = notebook else {return}
-        
         let managedObjectContext = dataController.viewContext
-        
-        //create fetchRequest
+    
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
-        
-        let noteTitleSortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
-        
+        let noteTitleSortDescriptor = NSSortDescriptor(key: "createdAt",
+                                                       ascending: true)
         request.predicate = NSPredicate(format: "notebook == %@", notebook)
         request.sortDescriptors = [noteTitleSortDescriptor]
         
@@ -66,6 +62,22 @@ class NoteTableViewController: UITableViewController, UIImagePickerControllerDel
         } catch {
             fatalError("unable to fetch notes from notebook: \(error.localizedDescription)")
         }
+    }
+    
+    //MARK: - Search for a note function
+    func searchNotes(title: String) {
+        guard let notebook = notebook else {return}
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        let sortByTitle = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sortByTitle]
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "notebook == %@ AND title contains[cd] %@", notebook, title)
+        
+        guard let managedObjectContext = dataController?.viewContext else {return}
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        
     }
     
     
@@ -214,15 +226,16 @@ extension NoteTableViewController: NSFetchedResultsControllerDelegate {
 
 //MARK: - SearchBar Function
 extension NoteTableViewController: UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, searchText: String) {
-        guard let searTextEntered = searchBar.text else {
-            return
-        }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let searchTextEntered = searchBar.text else {return}
         
-    //fetchNotes
+        searchNotes(title: searchTextEntered)
         
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar.isFirstResponder { searchBar.resignFirstResponder()}
+    }
     
 }
 

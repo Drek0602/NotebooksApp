@@ -5,7 +5,6 @@
 //  Created by Tim Acosta on 13/2/21.
 //
 
-import Foundation
 import UIKit
 import CoreData
 
@@ -162,9 +161,9 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pictureCell", for: indexPath) as? PictureCollectionViewCell,
-              let picture = fetchResultsController?.object(at: indexPath) as? PhotographMO,
-              let imageData = picture.imageData else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pictureCell", for: indexPath) as? PhotographCollectionViewCell,
+              let photograph = fetchResultsController?.object(at: indexPath) as? PhotographMO,
+              let imageData = photograph.imageData else {
             return UICollectionViewCell()
         }
         
@@ -176,7 +175,72 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
     
     
 }
- 
+
+
+//MARK: - Extension NSFetchedResultsControllerDelegate
+/// A delegate protocol that describes the methods that will be called by the associated fetched results controller when the fetch results have changed.
+
 extension NoteDetailViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        blockOperation = BlockOperation()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        let sectionIndexSet = IndexSet(integer: sectionIndex)
+        
+        switch type {
+            case .insert:
+                blockOperation.addExecutionBlock {
+                    self.collectionView.insertSections(sectionIndexSet)
+                }
+            case .delete:
+                blockOperation.addExecutionBlock {
+                    self.collectionView.deleteSections(sectionIndexSet)
+                }
+            case .update:
+                blockOperation.addExecutionBlock {
+                    self.collectionView.reloadSections(sectionIndexSet)
+                }
+            case .move:
+                break
+            @unknown default:
+                break
+        }
+        
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+            case .insert:
+                guard let newIndexPath = newIndexPath else {break}
+                
+                blockOperation.addExecutionBlock {
+                    self.collectionView.insertItems(at: [newIndexPath])
+                }
+            case .delete:
+                guard let indexPath = indexPath else {break}
+                
+                blockOperation.addExecutionBlock {
+                    self.collectionView.deleteItems(at: [indexPath])
+                }
+            case .update:
+                guard let indexPath = indexPath else {break}
+                
+                blockOperation.addExecutionBlock {
+                    self.collectionView.reloadItems(at: [indexPath])
+                }
+            case .move:
+                guard let newIndexPath = newIndexPath, let indexPath = indexPath else {break}
+                
+                blockOperation.addExecutionBlock {
+                    self.collectionView.moveItem(at: indexPath, to: newIndexPath)
+                }
+                
+            @unknown default:
+                break
+        }
+    }
     
 }
+    
+
