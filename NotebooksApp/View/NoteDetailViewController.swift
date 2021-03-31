@@ -135,6 +135,7 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
     func addNewPicNoteDetail(selectedImage: UIImage, url: URL) {
         guard let note = note else {return}
         dataController?.addPhotograph(with: selectedImage, and: url, in: note)
+        
     }
     
     
