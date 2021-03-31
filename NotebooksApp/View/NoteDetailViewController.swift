@@ -100,12 +100,13 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func addNoteNavigationBarButtom() -> UIBarButtonItem {
-        UIBarButtonItem(title: "Add image", style: .done, target: nil, action: #selector(createAndPresentPicker))
+        UIBarButtonItem(title: "Add image", style: .done, target: self, action: #selector(createAndPresentPicker))
     }
     
     //MARK: - Picker functions
     @objc
     func createAndPresentPicker(){
+        print("picker selected")
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
@@ -130,12 +131,14 @@ class NoteDetailViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
-    //MARK: - AddPicToNote TODO
+    
     func addNewPicNoteDetail(selectedImage: UIImage, url: URL) {
         guard let note = note else {return}
         dataController?.addPhotograph(with: selectedImage, and: url, in: note)
     }
-
+    
+    
+    //MARK: - setupCollectionView
     func setupCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         let numberOfColumns: CGFloat = 3
